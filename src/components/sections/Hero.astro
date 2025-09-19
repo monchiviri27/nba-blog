@@ -1,0 +1,48 @@
+---
+import { SITE } from '../../config';
+import { Icon } from 'astro-icon/components';
+
+const heroImagePath = '/images/nba-hero-editorial.jpg';
+---
+
+<section class="bg-background dark:bg-primary border-b border-border dark:border-accent transition-colors duration-300">
+  <div class="container mx-auto px-6 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+    
+    <div class="text-center lg:text-left z-10">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display text-primary dark:text-background leading-tight mb-4 animate-fade-in-up">
+        Desata tu <span class="text-accent dark:text-accent">pasión</span> por el basket.
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-secondary dark:text-secondary mb-10 max-w-2xl mx-auto lg:mx-0 animate-fade-in-up">
+        Análisis profundos, estadísticas y noticias de la mejor liga del mundo.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up">
+        <a 
+          href="/blog" 
+          class="inline-flex items-center justify-center px-8 py-3 text-base font-medium rounded-full text-white bg-accent hover:bg-blue-600 transition-colors shadow-lg hover:shadow-xl"
+        >
+          Explorar artículos
+          <Icon name="mdi:arrow-right" class="w-5 h-5 ml-2" />
+        </a>
+        
+        <a 
+          href="/teams" 
+          class="inline-flex items-center justify-center px-8 py-3 text-base font-medium rounded-full border-2 border-border dark:border-border text-primary dark:text-background bg-background dark:bg-primary hover:bg-surface dark:hover:bg-neutral-700 transition-colors"
+        >
+          Ver equipos
+          <Icon name="mdi:arrow-down" class="w-5 h-5 ml-2" />
+        </a>
+      </div>
+    </div>
+    
+    <div class="relative w-full h-auto mt-10 lg:mt-0 animate-fade-in-up">
+      <img
+        src={heroImagePath}
+        alt="Jugador de baloncesto en acción"
+        class="w-full h-auto object-cover rounded-lg shadow-2xl transition-all duration-500 ease-in-out hover:scale-105"
+      />
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,59 @@
+---
+import { SITE, NAVIGATION } from '../config';
+import { Icon } from 'astro-icon/components';
+
+const currentYear = new Date().getFullYear();
+const logoPath = '/images/assets/nba-logo.svg';
+---
+
+<footer class="bg-surface text-primary border-t border-border py-12 mt-16 dark:bg-primary dark:text-background transition-colors duration-300">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <a href="/" class="flex items-center gap-3 mb-4">
+          <img
+            src={logoPath}
+            alt="Cancha de Análisis Logo"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-xl font-bold">
+            {SITE.title}
+          </span>
+        </a>
+        <p class="text-secondary mb-6">
+          Análisis profundos, historias fascinantes y estadísticas detalladas del mundo de la NBA.
+        </p>
+      </div>
+      
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Enlaces Rápidos</h3>
+        <ul class="space-y-2">
+          {NAVIGATION.main.map((item) => (
+            <li>
+              <a href={item.href} class="text-secondary hover:text-accent transition-colors">
+                {item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Categorías</h3>
+        <ul class="space-y-2">
+          {NAVIGATION.categories && NAVIGATION.categories.map((category) => (
+            <li>
+              <a href={category.href} class="text-secondary hover:text-accent transition-colors">
+                {category.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-border mt-8 pt-8 text-center text-secondary">
+      <p>© {currentYear} {SITE.title}. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>

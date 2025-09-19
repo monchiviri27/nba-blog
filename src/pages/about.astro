@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config';
+---
+
+<BaseLayout title="Acerca de Nosotros" description="Conoce más sobre CourtSide y nuestro equipo de escritores especializados en NBA">
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-3xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold mb-6 text-gray-900 dark:text-white">Acerca de CourtSide</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300">
+          Tu fuente confiable para análisis profundos y historias de la NBA
+        </p>
+      </div>
+
+      <!-- Contenido principal -->
+      <div class="space-y-8">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md">
+          <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Nuestra Misión</h2>
+          <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+            En CourtSide, nos apasiona el baloncesto NBA y nos dedicamos a brindar 
+            análisis profundos, estadísticas detalladas y historias fascinantes 
+            que van más allá de los titulares convencionales.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
+            <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">🏀 Qué Hacemos</h3>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-[#ff8a4c] rounded-full"></span>
+                Análisis técnico de partidos y jugadores
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-[#4dabf7] rounded-full"></span>
+                Estadísticas avanzadas y visualizaciones
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-[#ffd43b] rounded-full"></span>
+                Historias detrás de las leyendas de la NBA
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-[#20c997] rounded-full"></span>
+                Cobertura de la actualidad baloncestística
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
+            <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">⭐ Nuestros Valores</h3>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-[#ff8a4c] rounded-full"></span>
+                Rigor analítico y precisión
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-[#4dabf7] rounded-full"></span>
+                Pasión por el deporte
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-[#ffd43b] rounded-full"></span>
+                Innovación en el contenido
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-[#20c997] rounded-full"></span>
+                Comunidad de fans
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-[#ff8a4c] to-[#4dabf7] rounded-xl p-8 text-center text-white">
+          <h2 class="text-2xl font-bold mb-4">Únete a la Comunidad</h2>
+          <p class="mb-6 opacity-90">
+            Sigue nuestras redes sociales y suscríbete para no perderte ningún contenido
+          </p>
+          <div class="flex justify-center gap-4">
+            <button class="px-6 py-3 bg-white text-gray-900 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+              Twitter
+            </button>
+            <button class="px-6 py-3 bg-white text-gray-900 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+              Instagram
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

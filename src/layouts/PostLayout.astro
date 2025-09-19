@@ -1,0 +1,166 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { SITE } from '../config';
+
+interface Props {
+  title: string;
+  description?: string;
+  pubDate?: Date;
+  author?: string;
+  tags?: string[];
+}
+
+const { title, description = SITE.description, pubDate, author = SITE.author, tags = [] } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="min-h-screen bg-gray-900 pt-8">
+    <!-- Header del artículo -->
+    <header class="container mx-auto px-4 max-w-4xl mb-8">
+      <div class="flex flex-wrap gap-2 mb-6">
+        {tags.map(tag => (
+          <span class="px-3 py-1 bg-[#ff8a4c] text-white text-sm font-medium rounded-full">
+            {tag}
+          </span>
+        ))}
+      </div>
+      
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
+        {title}
+      </h1>
+      
+      <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+        {description}
+      </p>
+      
+      <div class="flex flex-wrap items-center gap-6 text-gray-400">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-[#ff8a4c] to-[#4dabf7] rounded-full flex items-center justify-center">
+            <span class="font-bold text-white">{author.charAt(0)}</span>
+          </div>
+          <span>{author}</span>
+        </div>
+        
+        {pubDate && (
+          <>
+            <span class="hidden md:block">•</span>
+            <time class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              {new Date(pubDate).toLocaleDateString('es-ES', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}
+            </time>
+          </>
+        )}
+      </div>
+    </header>
+
+    <!-- Contenido del artículo -->
+    <div class="container mx-auto px-4 max-w-3xl">
+      <div class="prose prose-invert prose-lg max-w-none">
+        <slot />
+      </div>
+    </div>
+
+    <!-- Footer del artículo -->
+    <footer class="container mx-auto px-4 max-w-4xl mt-16 py-8 border-t border-gray-800">
+      <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Comparte este artículo</h3>
+          <div class="flex gap-3">
+            <button class="p-2 bg-gray-800 rounded-lg hover:bg-gray-750 transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </button>
+            <button class="p-2 bg-gray-800 rounded-lg hover:bg-gray-750 transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Más artículos</h3>
+          <a href="/blog" class="text-[#ff8a4c] hover:text-[#ff9c63] font-medium flex items-center gap-2">
+            Ver todos los artículos
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose {
+    color: #f0f0f0;
+    line-height: 1.7;
+  }
+  
+  .prose h2 {
+    color: #ffffff;
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .prose h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .prose p {
+    margin-bottom: 1.5rem;
+  }
+  
+  .prose a {
+    color: #ff8a4c;
+    text-decoration: none;
+  }
+  
+  .prose a:hover {
+    color: #ff9c63;
+    text-decoration: underline;
+  }
+  
+  .prose blockquote {
+    border-left: 4px solid #ff8a4c;
+    background-color: #2d2d2d;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+  
+  .prose img {
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+  }
+  
+  .prose code {
+    background-color: #2d2d2d;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+  
+  .prose pre {
+    background-color: #2d2d2d;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 2rem 0;
+  }
+</style>

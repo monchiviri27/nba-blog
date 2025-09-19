@@ -1,0 +1,59 @@
+---
+const categories = [
+  {
+    name: 'Noticias',
+    description: 'Últimas noticias y novedades de la NBA',
+    href: '/category/news',
+    icon: '📰',
+    count: 24
+  },
+  {
+    name: 'Análisis',
+    description: 'Análisis profundos de partidos y jugadores',
+    href: '/category/analysis',
+    icon: '📊',
+    count: 18
+  },
+  {
+    name: 'Estadísticas',
+    description: 'Datos y estadísticas de jugadores y equipos',
+    href: '/category/stats',
+    icon: '🏀',
+    count: 15
+  },
+  {
+    name: 'Entrevistas',
+    description: 'Entrevistas exclusivas con jugadores y entrenadores',
+    href: '/category/interviews',
+    icon: '🎤',
+    count: 12
+  }
+];
+---
+
+<section class="py-12 bg-neutral-100 dark:bg-neutral-800 transition-colors duration-300">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-neutral-900 dark:text-white mb-4">Explora por Categorías</h2>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">Descubre contenido organizado por temas de interés</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {categories.map(category => (
+        <a 
+          href={category.href} 
+          class="bg-white dark:bg-neutral-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 group"
+        >
+          <div class="text-3xl mb-4">{category.icon}</div>
+          <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mb-2 group-hover:text-[#203731] dark:group-hover:text-[#FFB612] transition-colors">
+            {category.name}
+          </h3>
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4">{category.description}</p>
+          <div class="text-sm text-[#203731] dark:text-[#FFB612] font-medium">
+            {category.count} artículos
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

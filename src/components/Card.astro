@@ -1,0 +1,82 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  href: string;
+  image?: string;
+  tags?: string[];
+}
+
+const { title, description, pubDate, href, image, tags = [] } = Astro.props;
+
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(date);
+};
+---
+
+<article class="bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-neutral-200 dark:border-neutral-700">
+  <a href={href} class="block">
+    {image && (
+      <div class="h-48 overflow-hidden">
+        <img 
+          src={image} 
+          alt={title} 
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+      </div>
+    )}
+    
+    <div class="p-6">
+      <div class="flex flex-wrap gap-2 mb-3">
+        {tags.slice(0, 3).map(tag => (
+          <span class="px-3 py-1 bg-[#203731] text-white text-xs font-medium rounded-full">
+            {tag}
+          </span>
+        ))}
+      </div>
+      
+      <h2 class="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-[#203731] dark:group-hover:text-[#FFB612] transition-colors mb-2 line-clamp-2">
+        {title}
+      </h2>
+      
+      <p class="text-neutral-600 dark:text-neutral-400 mb-4 line-clamp-3">
+        {description}
+      </p>
+      
+      <div class="flex items-center justify-between">
+        <time class="text-sm text-neutral-500 dark:text-neutral-500" datetime={pubDate.toISOString()}>
+          {formatDate(pubDate)}
+        </time>
+        
+        <span class="text-[#203731] dark:text-[#FFB612] font-semibold group-hover:text-[#2d4b43] dark:group-hover:text-[#ffca45] transition-colors flex items-center">
+          Leer más
+          <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+</style>

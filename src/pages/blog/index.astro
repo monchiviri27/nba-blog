@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { formatDate } from '../../config';
+
+// Obtener todos los posts del blog
+const allPosts = await getCollection('blog', ({ data }) => {
+  return !data.draft;
+});
+
+// Ordenar por fecha (más reciente primero)
+const sortedPosts = allPosts.sort((a, b) => 
+  new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+---
+
+<BaseLayout title="Todos los Artículos" description="Explora todos nuestros artículos sobre la NBA: análisis, noticias, estadísticas y más">
+  <div class="container mx-auto px-4 py-12">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Todos los Artículos</h1>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+        Descubre todo nuestro contenido sobre la NBA: análisis profundos, historias fascinantes y las últimas noticias.
+      </p>
+    </div>
+
+    <!-- Lista de artículos -->
+    <div class="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+      {sortedPosts.map((post, index) => (
+        <article class="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors group animate-fade-in" style={`animation-delay: ${index * 0.1}s`}>
+          <div class="flex flex-col md:flex-row md:items-start gap-6">
+            <!-- Imagen del artículo -->
+            <div class="md:w-48 md:flex-shrink-0">
+              <div class="aspect-video bg-gradient-to-br from-[#ff8a4c] to-[#4dabf7] rounded-lg overflow-hidden">
+                {post.data.heroImage ? (
+                  <img 
+                    src={post.data.heroImage} 
+                    alt={post.data.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center bg-gray-700">
+                    <span class="text-2xl">🏀</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <!-- Contenido -->
+            <div class="flex-1">
+              {/* Etiquetas */}
+              <div class="flex flex-wrap gap-2 mb-3">
+                {post.data.tags.slice(0, 3).map(tag => (
+                  <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Título */}
+              <h2 class="text-2xl font-bold mb-3">
+                <a 
+                  href={`/blog/${post.slug}`} 
+                  class="text-white hover:text-[#ff8a4c] transition-colors"
+                >
+                  {post.data.title}
+                </a>
+              </h2>
+
+              {/* Descripción */}
+              <p class="text-gray-400 mb-4 line-clamp-3">
+                {post.data.description}
+              </p>
+
+              {/* Metadata */}
+              <div class="flex items-center justify-between text-sm text-gray-500">
+                <div class="flex items-center gap-4">
+                  <span>{post.data.author}</span>
+                  <span>•</span>
+                  <time>{formatDate(post.data.pubDate)}</time>
+                </div>
+                
+                <a 
+                  href={`/blog/${post.slug}`} 
+                  class="text-[#ff8a4c] hover:text-[#ff9c63] font-medium flex items-center gap-2 transition-colors"
+                >
+                  Leer artículo
+                  <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Empty state -->
+    {sortedPosts.length === 0 && (
+      <div class="text-center py-16">
+        <div class="text-6xl mb-4">🏀</div>
+        <h2 class="text-2xl font-bold mb-4">No hay artículos todavía</h2>
+        <p class="text-gray-400">Pronto publicaremos contenido increíble sobre la NBA.</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+

@@ -1,11 +1,163 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../config'; 
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => 
+  new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+
+// Función para obtener la imagen correcta
+const getImageUrl = (post) => {
+  if (!post.data.heroImage) return null;
+  
+  // Si es una URL externa
+  if (post.data.heroImage.startsWith('http')) {
+    return post.data.heroImage;
+  }
+  
+  // Si es una ruta local, asegurar que empiece con /
+  return post.data.heroImage.startsWith('/') 
+    ? post.data.heroImage 
+    : `/${post.data.heroImage}`;
+};
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title="Inicio" description="Análisis profundos y historias de la NBA">
+    <!-- Hero Section -->
+    <section class="relative h-[500px] md:h-[600px] flex items-center justify-center text-center overflow-hidden">
+    <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('/images/post/nba5.jpg');">
+    </div>
+
+    <div class="absolute inset-0 z-10 bg-black/60 dark:bg-black/75 transition-colors duration-300"></div>
+
+    <div class="relative z-20 px-4">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-md leading-tight">
+            {SITE.title}
+        </h1>
+        <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto drop-shadow-sm">
+            Análisis, historias y estadísticas detalladas del mundo del baloncesto.
+        </p>
+        <a 
+            href="/blog" 
+            class="inline-block px-8 py-4 bg-accent hover:bg-blue-600 text-white font-bold rounded-full text-lg shadow-lg transition-colors duration-300 transform hover:scale-105"
+        >
+            Ver Artículos
+        </a>
+    </div>
+</section>
+
+    <!-- Featured Posts -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Artículos Destacados</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {sortedPosts.slice(0, 3).map(post => {
+                    const imageUrl = getImageUrl(post);
+                    const placeholderColors = ['from-[#ff8a4c] to-[#ff6b35]', 'from-[#4dabf7] to-[#339af0]', 'from-[#20c997] to-[#12b886]'];
+                    const colorIndex = Math.floor(Math.random() * placeholderColors.length);
+                    
+                    return (
+                    <article class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-transform group">
+                        {/* Imagen del artículo */}
+                        <div class="h-48 overflow-hidden">
+                            {imageUrl ? (
+                                <img 
+                                    src={imageUrl} 
+                                    alt={post.data.title}
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                    loading="lazy"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                />
+                            ) : null}
+                            
+                            {/* Placeholder si no hay imagen o falla la carga */}
+                            <div class={`w-full h-full bg-gradient-to-br ${placeholderColors[colorIndex]} flex items-center justify-center ${imageUrl ? 'hidden' : 'flex'}`}>
+                                <span class="text-4xl text-white opacity-80">🏀</span>
+                            </div>
+                        </div>
+                        
+                        <div class="p-6">
+                            <div class="flex gap-2 mb-3">
+                                {post.data.tags.slice(0, 2).map(tag => (
+                                    <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-white">
+                                <a href={`/blog/${post.slug}`} class="hover:text-[#ff8a4c] transition-colors">
+                                    {post.data.title}
+                                </a>
+                            </h3>
+                            <p class="text-gray-400 mb-4 line-clamp-2">
+                                {post.data.description}
+                            </p>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <time>{new Date(post.data.pubDate).toLocaleDateString('es-ES')}</time>
+                                <a href={`/blog/${post.slug}`} class="text-[#ff8a4c] hover:text-[#ff9c63] font-medium">
+                                    Leer más →
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    );
+                })}
+            </div>
+            
+            {/* Botón para ver todos los artículos */}
+            {sortedPosts.length > 3 && (
+                <div class="text-center mt-12">
+                    <a href="/blog" class="inline-flex items-center px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+                        Ver todos los artículos
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            )}
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-surface dark:bg-primary transition-colors duration-300">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-primary dark:text-background mb-4">No te pierdas ningún partido</h2>
+        <p class="text-xl text-secondary dark:text-secondary mb-8 max-w-2xl mx-auto">
+            Suscríbete para recibir análisis exclusivos y las últimas noticias de la NBA.
+        </p>
+        <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+            <input 
+                type="email" 
+                placeholder="Tu email" 
+                class="flex-grow px-4 py-3 rounded-lg bg-background dark:bg-gray-700 border border-border dark:border-gray-600 text-primary dark:text-background placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent"
+                required
+            />
+            <button 
+                type="submit" 
+                class="px-6 py-3 bg-accent hover:bg-blue-600 text-white font-bold rounded-lg transition-colors"
+            >
+                Suscribirse
+            </button>
+        </form>
+    </div>
+</section>
+
+</BaseLayout>
+
+<style>
+    .line-clamp-2 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>

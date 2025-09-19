@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-[#ff8a4c] hover:bg-[#ff9c63] text-white font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#ff8a4c] focus:ring-offset-2 dark:focus:ring-offset-gray-900;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 dark:border-gray-700;
+  }
+}
+
+/* Mejorar contraste en modo claro y oscuro */
+.light {
+  --color-text: #1a1a1a;
+  --color-text-secondary: #4b5563;
+  --color-bg: #ffffff;
+  --color-surface: #f8f9fa;
+}
+
+.dark {
+  --color-text: #f0f0f0;
+  --color-text-secondary: #a0a0a0;
+  --color-bg: #1a1a1a;
+  --color-surface: #242424;
+}
+
+/* Selección de texto */
+::selection {
+  background-color: #ff8a4c;
+  color: white;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
