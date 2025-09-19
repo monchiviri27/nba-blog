@@ -4,13 +4,10 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import react from '@astrojs/react';
 
-// Replace "your-username" and "your-repo" with your GitHub username and repository name
-const GITHUB_USERNAME = 'monchiviri27'; 
-const GITHUB_REPO = 'nba-blog'; 
-
 export default defineConfig({
-  site: `https://${GITHUB_USERNAME}.github.io`,
-  base: `/${GITHUB_REPO}`,
+  // Las URL deben coincidir exactamente con tu URL de GitHub Pages
+  site: 'https://monchiviri27.github.io',
+  base: '/nba-blog',
   integrations: [
     tailwind(), 
     mdx(), 
