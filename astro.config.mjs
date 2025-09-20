@@ -8,7 +8,6 @@ export default defineConfig({
   // Las URL deben coincidir exactamente con tu URL de GitHub Pages
   site: 'https://monchiviri27.github.io',
   base: '/nba-blog',
-  output:'static',
   integrations: [
     tailwind(), 
     mdx(), 
