@@ -16,7 +16,6 @@ const sortedPosts = allPosts.sort((a, b) =>
 
 <BaseLayout title="Todos los Artículos" description="Explora todos nuestros artículos sobre la NBA: análisis, noticias, estadísticas y más">
   <div class="container mx-auto px-4 py-12">
-    <!-- Header -->
     <div class="text-center mb-16">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">Todos los Artículos</h1>
       <p class="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -24,12 +23,10 @@ const sortedPosts = allPosts.sort((a, b) =>
       </p>
     </div>
 
-    <!-- Lista de artículos -->
     <div class="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
       {sortedPosts.map((post, index) => (
         <article class="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors group animate-fade-in" style={`animation-delay: ${index * 0.1}s`}>
           <div class="flex flex-col md:flex-row md:items-start gap-6">
-            <!-- Imagen del artículo -->
             <div class="md:w-48 md:flex-shrink-0">
               <div class="aspect-video bg-gradient-to-br from-[#ff8a4c] to-[#4dabf7] rounded-lg overflow-hidden">
                 {post.data.heroImage ? (
@@ -47,7 +44,6 @@ const sortedPosts = allPosts.sort((a, b) =>
               </div>
             </div>
 
-            <!-- Contenido -->
             <div class="flex-1">
               {/* Etiquetas */}
               <div class="flex flex-wrap gap-2 mb-3">
@@ -61,7 +57,7 @@ const sortedPosts = allPosts.sort((a, b) =>
               {/* Título */}
               <h2 class="text-2xl font-bold mb-3">
                 <a 
-                  href={`/blog/${post.slug}`} 
+                  href={`${import.meta.env.BASE_URL}blog/${post.slug}`} 
                   class="text-white hover:text-[#ff8a4c] transition-colors"
                 >
                   {post.data.title}
@@ -82,7 +78,7 @@ const sortedPosts = allPosts.sort((a, b) =>
                 </div>
                 
                 <a 
-                  href={`/blog/${post.slug}`} 
+                  href={`${import.meta.env.BASE_URL}blog/${post.slug}`} 
                   class="text-[#ff8a4c] hover:text-[#ff9c63] font-medium flex items-center gap-2 transition-colors"
                 >
                   Leer artículo
@@ -97,7 +93,6 @@ const sortedPosts = allPosts.sort((a, b) =>
       ))}
     </div>
 
-    <!-- Empty state -->
     {sortedPosts.length === 0 && (
       <div class="text-center py-16">
         <div class="text-6xl mb-4">🏀</div>

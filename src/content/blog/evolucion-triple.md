@@ -66,7 +66,7 @@ Algunas tendencias emergentes:
 - **"Drive-and-kick"**: Ofensivas diseñadas específicamente para crear triples
 - **Defensas adaptativas**: Esquemas defensivos innovadores para contrarrestar el triple
 
-![Evolución del triple por década](/images/post/nba6.png)
+![Evolución del triple por década](/nba-blog/images/post/nba6.png)
 
 *La progresión constante de intentos de triple muestra una transformación completa del juego*
 
