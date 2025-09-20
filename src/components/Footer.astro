@@ -3,7 +3,8 @@ import { SITE, NAVIGATION } from '../config';
 import { Icon } from 'astro-icon/components';
 
 const currentYear = new Date().getFullYear();
-const logoPath = '/images/assets/nba-logo.svg';
+// Ruta del logo corregida
+const logoPath = `${import.meta.env.BASE_URL}images/assets/nba-logo.svg`;
 ---
 
 <footer class="bg-surface text-primary border-t border-border py-12 mt-16 dark:bg-primary dark:text-background transition-colors duration-300">

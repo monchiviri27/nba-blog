@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { SITE } from '../config'; 
+import { SITE } from '../config';
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => 
@@ -11,23 +11,22 @@ const sortedPosts = posts.sort((a, b) =>
 // Función para obtener la imagen correcta
 const getImageUrl = (post) => {
   if (!post.data.heroImage) return null;
-  
+    
   // Si es una URL externa
   if (post.data.heroImage.startsWith('http')) {
     return post.data.heroImage;
   }
-  
-  // Si es una ruta local, asegurar que empiece con /
-  return post.data.heroImage.startsWith('/') 
-    ? post.data.heroImage 
-    : `/${post.data.heroImage}`;
+    
+  // Si es una ruta local, se asegura que la ruta base esté incluida
+  return `${import.meta.env.BASE_URL}${post.data.heroImage.startsWith('/')
+    ? post.data.heroImage.substring(1)
+    : post.data.heroImage}`;
 };
 ---
 
 <BaseLayout title="Inicio" description="Análisis profundos y historias de la NBA">
-    <!-- Hero Section -->
-    <section class="relative h-[500px] md:h-[600px] flex items-center justify-center text-center overflow-hidden">
-    <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('/images/post/nba5.jpg');">
+        <section class="relative h-[500px] md:h-[600px] flex items-center justify-center text-center overflow-hidden">
+    <div class="absolute inset-0 z-0 bg-cover bg-center" style={`background-image: url('${import.meta.env.BASE_URL}images/post/nba5.jpg')`}>
     </div>
 
     <div class="absolute inset-0 z-10 bg-black/60 dark:bg-black/75 transition-colors duration-300"></div>
@@ -40,7 +39,7 @@ const getImageUrl = (post) => {
             Análisis, historias y estadísticas detalladas del mundo del baloncesto.
         </p>
         <a 
-            href="/nba-blog/blog" 
+            href={`${import.meta.env.BASE_URL}blog`} 
             class="inline-block px-8 py-4 bg-accent hover:bg-blue-600 text-white font-bold rounded-full text-lg shadow-lg transition-colors duration-300 transform hover:scale-105"
         >
             Ver Artículos
@@ -48,8 +47,7 @@ const getImageUrl = (post) => {
     </div>
 </section>
 
-    <!-- Featured Posts -->
-    <section class="py-16">
+        <section class="py-16">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12">Artículos Destacados</h2>
             
@@ -88,7 +86,7 @@ const getImageUrl = (post) => {
                                 ))}
                             </div>
                             <h3 class="text-xl font-bold mb-2 text-white">
-                                <a href={`/blog/${post.slug}`} class="hover:text-[#ff8a4c] transition-colors">
+                                <a href={`${import.meta.env.BASE_URL}blog/${post.slug}`} class="hover:text-[#ff8a4c] transition-colors">
                                     {post.data.title}
                                 </a>
                             </h3>
@@ -97,7 +95,7 @@ const getImageUrl = (post) => {
                             </p>
                             <div class="flex items-center justify-between text-sm text-gray-500">
                                 <time>{new Date(post.data.pubDate).toLocaleDateString('es-ES')}</time>
-                                <a href={`/blog/${post.slug}`} class="text-[#ff8a4c] hover:text-[#ff9c63] font-medium">
+                                <a href={`${import.meta.env.BASE_URL}blog/${post.slug}`} class="text-[#ff8a4c] hover:text-[#ff9c63] font-medium">
                                     Leer más →
                                 </a>
                             </div>
@@ -110,7 +108,7 @@ const getImageUrl = (post) => {
             {/* Botón para ver todos los artículos */}
             {sortedPosts.length > 3 && (
                 <div class="text-center mt-12">
-                    <a href="/blog" class="inline-flex items-center px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+                    <a href={`${import.meta.env.BASE_URL}blog`} class="inline-flex items-center px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
                         Ver todos los artículos
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -121,8 +119,7 @@ const getImageUrl = (post) => {
         </div>
     </section>
 
-    <!-- Newsletter -->
-    <section class="py-16 bg-surface dark:bg-primary transition-colors duration-300">
+        <section class="py-16 bg-surface dark:bg-primary transition-colors duration-300">
     <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl font-bold text-primary dark:text-background mb-4">No te pierdas ningún partido</h2>
         <p class="text-xl text-secondary dark:text-secondary mb-8 max-w-2xl mx-auto">
@@ -148,16 +145,16 @@ const getImageUrl = (post) => {
 </BaseLayout>
 
 <style>
-    .line-clamp-2 {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-    }
-    
-    .container {
-        max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>

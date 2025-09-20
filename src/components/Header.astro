@@ -2,9 +2,8 @@
 import { SITE } from '../config';
 import Navigation from './Navigation.astro';
 
-// La ruta del logo ahora es una variable.
-// Mueve tu logo a /public/images/assets/nba-logo.svg
-const logoPath = '/images/assets/nba-logo.svg'; 
+// La ruta del logo ahora usa la variable de entorno BASE_URL
+const logoPath = `${import.meta.env.BASE_URL}images/assets/nba-logo.svg`;
 ---
 <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
     <div class="container mx-auto px-4">
@@ -22,7 +21,7 @@ const logoPath = '/images/assets/nba-logo.svg';
             </div>
 
             <div class="flex items-center gap-3">
-    <form action="/search" method="get" class="hidden lg:block">
+    <form action={`${import.meta.env.BASE_URL}search`} method="get" class="hidden lg:block">
         <div class="relative">
             <input
                 type="text"
