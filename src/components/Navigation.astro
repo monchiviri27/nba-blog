@@ -16,11 +16,11 @@ const navItems = [
 
 {
   variant === 'mobile' ? (
-    <nav class="flex flex-col space-y-2">
+    <nav class="flex flex-col space-y-2 w-full">
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          class="nav-link-mobile flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
         >
           {item.label}
         </a>
@@ -39,3 +39,9 @@ const navItems = [
     </nav>
   )
 }
+
+<style>
+  .nav-link-mobile {
+    display: block !important;
+  }
+</style>
