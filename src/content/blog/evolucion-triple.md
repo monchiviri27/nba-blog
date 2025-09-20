@@ -4,14 +4,14 @@ description: "Análisis detallado de cómo el tiro de tres puntos transformó la
 pubDate: 2024-03-10
 author: "David Chen"
 tags: ["triple", "analisis", "estadísticas", "estrategia", "revolución"]
-heroImage: "/images/post/nba6.png"
+heroImage: "/nba-blog/images/post/nba6.png"
 featured: true
 draft: false
 ---
 
 El tiro de tres puntos ha pasado de ser una curiosidad ocasional a convertirse en el fundamento ofensivo más importante del baloncesto moderno. Esta transformación no fue accidental sino el resultado de análisis de datos, evolución estratégica y cambios en las reglas.
 
-![Evolución del triple por década](/images/post/nba6.png)
+![Evolución del triple por década](/nba-blog/images/post/nba6.png)
 
 ## Los Orígenes: Una Idea Radical
 

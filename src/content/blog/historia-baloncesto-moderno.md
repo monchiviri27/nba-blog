@@ -4,7 +4,7 @@ description: "Un análisis profundo de cómo el juego ha cambiado radicalmente e
 pubDate: 2024-03-15
 author: "Carlos Martínez"
 tags: ["historia", "evolución", "analisis", "estadísticas"]
-heroImage: "/images/post/nba2.jpg"
+heroImage: "/nba-blog/images/post/nba2.jpg"
 featured: true
 draft: false
 ---
@@ -42,7 +42,7 @@ Varios equipos y entrenadores fueron cruciales en esta transformación:
 
 La versatilidad seguirá siendo valorada sobre la especialización, y es probable que veamos aún más énfasis en la creación de ventajas mediante el dribling y pases precisos.
 
-![Evolución del triple en la NBA](/images/post/nba1.jpg)
+![Evolución del triple en la NBA](/nba-blog/images/post/nba1.jpg)
 
 *La progresión de intentos de triple en las últimas dos décadas muestra cómo el juego ha cambiado radicalmente*
 
