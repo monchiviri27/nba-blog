@@ -4,7 +4,7 @@ description: "Un homenaje a las figuras icónicas cuya influencia trasciende est
 pubDate: 2024-02-28
 author: "Ana Rodríguez"
 tags: ["leyendas", "historia", "Michael Jordan", "Magic Johnson", "Larry Bird"]
-heroImage: "/nba-blog/images/post/nfl7.webp"
+heroImage: "/images/post/nfl7.webp"
 featured: true
 draft: false
 ---
@@ -47,7 +47,7 @@ Con 20 temporadas en la NBA, Kareem mantuvo un nivel de excelencia que quizás n
 
 Antes de que las estadísticas avanzadas midieran el impacto defensivo, Bill Russell demostró que la defensa gana campeonatos. Sus 11 anillos en 13 temporadas siguen siendo el estándar de excelencia en deportes profesionales.
 
-![Leyendas de la NBA](/nba-blog/images/post/nfl7.webp)
+![Leyendas de la NBA](/images/post/nfl7.webp)
 
 *El legado de estas leyendas continúa influenciando a generaciones de jugadores*
 
