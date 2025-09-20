@@ -7,7 +7,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   // Las URL deben coincidir exactamente con tu URL de GitHub Pages
   site: 'https://monchiviri27.github.io',
-  base: '/nba-blog',
+  base: '/nba-blog/',
   integrations: [
     tailwind(), 
     mdx(), 
