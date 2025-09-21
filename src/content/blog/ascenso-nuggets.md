@@ -21,7 +21,7 @@ Pero los Nuggets no son solo Jokić. Jamal Murray ha regresado de su lesión con
 
 Con un núcleo joven y talentoso, los Nuggets están posicionados para ser contendientes durante los próximos años. Su enfoque en el desarrollo de jugadores y la construcción a través del draft es un modelo a seguir para otras franquicias.
 
-![Nikola Jokić en acción](/images/post/nba3.jpg)
+![Nikola Jokić en acción](/blog-nba/images/post/nba3.jpg)
 
 *Nikola Jokić liderando el ataque de los Nuggets*
 
