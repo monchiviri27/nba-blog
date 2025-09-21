@@ -8,11 +8,9 @@ interface Props {
   pubDate?: Date;
   author?: string;
   tags?: string[];
-  // Añadimos la prop para la imagen principal
   heroImage?: string; 
 }
 
-// Destructuramos la prop `heroImage`
 const { 
   title, 
   description = SITE.description, 
@@ -22,16 +20,13 @@ const {
   heroImage 
 } = Astro.props;
 
-// Función para obtener la URL de la imagen
 const getImageUrl = (imagePath) => {
   if (!imagePath) return null;
-  // Se asegura que la ruta base esté incluida para GitHub Pages
   return `${import.meta.env.BASE_URL}${imagePath.startsWith('/') 
     ? imagePath.substring(1) 
     : imagePath}`;
 };
 
-// Obtenemos la URL de la imagen principal
 const mainImageUrl = getImageUrl(heroImage);
 
 ---
@@ -117,7 +112,7 @@ const mainImageUrl = getImageUrl(heroImage);
           
         <div>
           <h3 class="text-lg font-semibold text-white mb-4">Más artículos</h3>
-          <a href="/blog" class="text-[#ff8a4c] hover:text-[#ff9c63] font-medium flex items-center gap-2">
+          <a href={`${import.meta.env.BASE_URL}blog`} class="text-[#ff8a4c] hover:text-[#ff9c63] font-medium flex items-center gap-2">
             Ver todos los artículos
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
