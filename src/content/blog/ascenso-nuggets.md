@@ -7,6 +7,8 @@ tags: ["nuggets", "nba", "analisis"]
 heroImage: "/images/post/nba3.jpg"
 ---
 
+import MarkdownImage from '../../components/MarkdownImage.astro';
+
 Los Denver Nuggets han demostrado ser uno de los equipos más formidables de la NBA en los últimos años. Con Nikola Jokić liderando el equipo, han desarrollado un estilo de juego único que combina la eficiencia ofensiva con una defensa sólida.
 
 ## El impacto de Nikola Jokić
@@ -21,7 +23,8 @@ Pero los Nuggets no son solo Jokić. Jamal Murray ha regresado de su lesión con
 
 Con un núcleo joven y talentoso, los Nuggets están posicionados para ser contendientes durante los próximos años. Su enfoque en el desarrollo de jugadores y la construcción a través del draft es un modelo a seguir para otras franquicias.
 
-![Nikola Jokić en acción](/blog-nba/images/post/nba3.jpg)
+<MarkdownImage src="/images/post/nba3.jpg" alt="Nikola Jokić en acción" />
+
 
 *Nikola Jokić liderando el ataque de los Nuggets*
 
