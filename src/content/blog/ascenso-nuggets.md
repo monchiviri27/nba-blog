@@ -7,7 +7,7 @@ tags: ["nuggets", "nba", "analisis"]
 heroImage: "/images/post/nba3.jpg"
 ---
 
-import MarkdownImage from '../../components/MarkdownImage.astro';
+import MarkdownImage from '../../../components/MarkdownImage.astro';
 
 Los Denver Nuggets han demostrado ser uno de los equipos más formidables de la NBA en los últimos años. Con Nikola Jokić liderando el equipo, han desarrollado un estilo de juego único que combina la eficiencia ofensiva con una defensa sólida.
 
