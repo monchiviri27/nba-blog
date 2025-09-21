@@ -8,14 +8,36 @@ interface Props {
   pubDate?: Date;
   author?: string;
   tags?: string[];
+  // Añadimos la prop para la imagen principal
+  heroImage?: string; 
 }
 
-const { title, description = SITE.description, pubDate, author = SITE.author, tags = [] } = Astro.props;
+// Destructuramos la prop `heroImage`
+const { 
+  title, 
+  description = SITE.description, 
+  pubDate, 
+  author = SITE.author, 
+  tags = [],
+  heroImage 
+} = Astro.props;
+
+// Función para obtener la URL de la imagen
+const getImageUrl = (imagePath) => {
+  if (!imagePath) return null;
+  // Se asegura que la ruta base esté incluida para GitHub Pages
+  return `${import.meta.env.BASE_URL}${imagePath.startsWith('/') 
+    ? imagePath.substring(1) 
+    : imagePath}`;
+};
+
+// Obtenemos la URL de la imagen principal
+const mainImageUrl = getImageUrl(heroImage);
+
 ---
 
 <BaseLayout title={title} description={description}>
   <article class="min-h-screen bg-gray-900 pt-8">
-    <!-- Header del artículo -->
     <header class="container mx-auto px-4 max-w-4xl mb-8">
       <div class="flex flex-wrap gap-2 mb-6">
         {tags.map(tag => (
@@ -24,15 +46,15 @@ const { title, description = SITE.description, pubDate, author = SITE.author, ta
           </span>
         ))}
       </div>
-      
+        
       <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
         {title}
       </h1>
-      
+        
       <p class="text-xl text-gray-300 mb-8 leading-relaxed">
         {description}
       </p>
-      
+        
       <div class="flex flex-wrap items-center gap-6 text-gray-400">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 bg-gradient-to-br from-[#ff8a4c] to-[#4dabf7] rounded-full flex items-center justify-center">
@@ -40,7 +62,7 @@ const { title, description = SITE.description, pubDate, author = SITE.author, ta
           </div>
           <span>{author}</span>
         </div>
-        
+          
         {pubDate && (
           <>
             <span class="hidden md:block">•</span>
@@ -59,14 +81,22 @@ const { title, description = SITE.description, pubDate, author = SITE.author, ta
       </div>
     </header>
 
-    <!-- Contenido del artículo -->
+    {mainImageUrl && (
+      <div class="container mx-auto px-4 max-w-4xl mb-8">
+        <img 
+          src={mainImageUrl} 
+          alt={`Imagen principal para ${title}`} 
+          class="w-full h-auto rounded-xl shadow-lg"
+        />
+      </div>
+    )}
+
     <div class="container mx-auto px-4 max-w-3xl">
       <div class="prose prose-invert prose-lg max-w-none">
         <slot />
       </div>
     </div>
 
-    <!-- Footer del artículo -->
     <footer class="container mx-auto px-4 max-w-4xl mt-16 py-8 border-t border-gray-800">
       <div class="flex flex-col md:flex-row justify-between items-start gap-6">
         <div>
@@ -84,7 +114,7 @@ const { title, description = SITE.description, pubDate, author = SITE.author, ta
             </button>
           </div>
         </div>
-        
+          
         <div>
           <h3 class="text-lg font-semibold text-white mb-4">Más artículos</h3>
           <a href="/blog" class="text-[#ff8a4c] hover:text-[#ff9c63] font-medium flex items-center gap-2">
@@ -104,7 +134,7 @@ const { title, description = SITE.description, pubDate, author = SITE.author, ta
     color: #f0f0f0;
     line-height: 1.7;
   }
-  
+    
   .prose h2 {
     color: #ffffff;
     font-size: 1.875rem;
@@ -112,7 +142,7 @@ const { title, description = SITE.description, pubDate, author = SITE.author, ta
     margin-top: 2.5rem;
     margin-bottom: 1rem;
   }
-  
+    
   .prose h3 {
     color: #ffffff;
     font-size: 1.5rem;
@@ -120,21 +150,21 @@ const { title, description = SITE.description, pubDate, author = SITE.author, ta
     margin-top: 2rem;
     margin-bottom: 0.75rem;
   }
-  
+    
   .prose p {
     margin-bottom: 1.5rem;
   }
-  
+    
   .prose a {
     color: #ff8a4c;
     text-decoration: none;
   }
-  
+    
   .prose a:hover {
     color: #ff9c63;
     text-decoration: underline;
   }
-  
+    
   .prose blockquote {
     border-left: 4px solid #ff8a4c;
     background-color: #2d2d2d;
@@ -143,19 +173,19 @@ const { title, description = SITE.description, pubDate, author = SITE.author, ta
     font-style: italic;
     border-radius: 0 0.5rem 0.5rem 0;
   }
-  
+    
   .prose img {
     border-radius: 0.5rem;
     margin: 2rem 0;
   }
-  
+    
   .prose code {
     background-color: #2d2d2d;
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
     font-size: 0.875em;
   }
-  
+    
   .prose pre {
     background-color: #2d2d2d;
     padding: 1.5rem;
